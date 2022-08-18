@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import Button from '../Button/Button'
+import CardHistorico from '../CardHistorico/CardHistorico'
 import Input from '../Input/Input'
 import Label from '../Label/Label'
 
@@ -12,6 +13,13 @@ const Search = () => {
     'Accept': 'application/json'
   }
 
+  const insertCep = ()=> {
+    const cep = informacoes.cep
+    const logradouro = informacoes.logradouro
+    const bairro = informacoes.bairro
+    const cidade = informacoes.cidade
+    const estado = informacoes.estado
+  }
 
   const handleReq = async () => {
     console.log(cep)
@@ -25,10 +33,11 @@ const Search = () => {
     <div>
         <Label texto="Digite seu CEP:"/>
         <Input tipo="text" value={cep} onChange={e=>setCep(e.target.value)}/>
-        {/* <Button onClick={handleReq}/> */}
-        <button onClick={handleReq}>GO</button>
+        <Button onClick={handleReq}/>
         {console.log(informacoes)}
         <h2>{informacoes ? informacoes.cep : 'carregando'}</h2>
+
+        
     </div>
   )
 }
