@@ -14,19 +14,19 @@ const Search = () => {
   }
 
   const insertCep = ()=> {
-    const cep = informacoes.cep
-    const logradouro = informacoes.logradouro
-    const bairro = informacoes.bairro
-    const cidade = informacoes.cidade
-    const estado = informacoes.estado
+    let cep = informacoes.cep
+    let logradouro = informacoes.logradouro
+    let bairro = informacoes.bairro
+    let cidade = informacoes.localidade
+    let estado = informacoes.uf
+    console.log(cep, logradouro, bairro, cidade, estado)
   }
 
   const handleReq = async () => {
-    console.log(cep)
     const resp = await fetch(`https://viacep.com.br/ws/${cep}/json/`, {headers})
     const json = await resp.json()
     setInformacoes(json)
-    console.log(json)
+    insertCep();
   }
 
   return (
@@ -34,8 +34,11 @@ const Search = () => {
         <Label texto="Digite seu CEP:"/>
         <Input tipo="text" value={cep} onChange={e=>setCep(e.target.value)}/>
         <Button onClick={handleReq}/>
-        {console.log(informacoes)}
         <h2>{informacoes ? informacoes.cep : 'carregando'}</h2>
+        <h2>{informacoes ? informacoes.logradouro : ''}</h2>
+        <h2>{informacoes ? informacoes.bairro : ''}</h2>
+        <h2>{informacoes ? informacoes.localidade : ''}</h2>
+        <h2>{informacoes ? informacoes.uf : ''}</h2>
 
         
     </div>
